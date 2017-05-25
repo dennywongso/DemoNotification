@@ -46,5 +46,34 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                PendingIntent pIntent = PendingIntent.getActivity(MainActivity.this, requestCode, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+                Notification.BigTextStyle bigText = new Notification.BigTextStyle();
+                bigText.bigText("This is one big text");
+                bigText.setBigContentTitle("Big Text - Long Content");
+                bigText.setSummaryText("Reflection Journal?");
+
+                Notification.Builder builder = new Notification.Builder(MainActivity.this);
+                builder.setContentTitle("Amazing Offer!");
+                builder.setContentText("subject");
+                builder.setSmallIcon(R.mipmap.ic_launcher);
+                builder.setContentIntent(pIntent);
+                builder.setStyle(bigText);
+                builder.setAutoCancel(true);
+
+
+                Notification n = builder.build();
+
+                NotificationManager notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+
+                notificationManager.notify(notificationID, n);
+                finish();
+            }
+        });
     }
 }
